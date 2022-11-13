@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
 import { Button, MenuItem } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { useState, useEffect } from 'react';
 import { states } from '../util/constants';
 
@@ -14,7 +15,8 @@ export default function AddressForm({ handleSubmit }) {
         zip: "",
 
     });
-    const [formValid, setFormValid] = useState(false)
+    const [formValid, setFormValid] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (data?.address && data?.city && data?.state && data?.zip) {
@@ -137,19 +139,23 @@ export default function AddressForm({ handleSubmit }) {
                     </div>
                     <div>
 
-                        <Button fullWidth
+                        <LoadingButton fullWidth
                             variant="contained"
                             size="large"
+                            loading={loading}
                             style={{
                                 marginTop: '8px'
                             }}
                             disabled={!formValid}
+                            loadingPosition="end"
                             onClick={async () => {
+                                setLoading(true);
                                 let res = await handleSubmit(data);
                                 if (res) {
                                     clearInput();
                                 }
-                            }}>Submit</Button>
+                                setLoading(false);
+                            }}>Submit</LoadingButton>
                     </div>
 
                 </Box>
