@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Address Locator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Address Locator is a Web application that displays the quadrant of the provided address .
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Screenshots
 
-### `npm start`
+### Home Screen
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Screenshot](Home.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Result Screen
 
-### `npm test`
+![Screenshot](Result.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Map Screen
 
-### `npm run build`
+![Screenshot](Map.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## User Stories
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### As a user:
+* I can enter address details.
+* On submission, I should be able to see the quadrant of the provided address.
+* On result card, I can navigate to the address on Google Maps.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Routes
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Name | Path | HTTP Verb | Purpose |
+|--------|-----|--------|-----|
+| Home | / | GET | Home Page
+| Detail API | /getDetailsForAddress | POST | Get address details
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Test Cases
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To validate details in the following components.
+* CardComponent
 
-### Code Splitting
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Backend
 
-### Analyzing the Bundle Size
+Express
+Morgan
+Node
+Heroku
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Frontend
 
-### Making a Progressive Web App
+ReactJS
+JaveScript
+HTML5
+CSS
+Material UI
+Netlify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[Click Here](https://github.com/madhu-mida/address-locator-backend) to see Backend Repo.
 
-### Deployment
+[Click Here](https://admirable-caramel-48046a.netlify.app) to see deployed Netlify app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Future Enhancements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Add favorites, recent searches.
