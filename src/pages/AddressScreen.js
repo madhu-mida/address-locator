@@ -1,33 +1,67 @@
 import AddressForm from "../components/AddressForm";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Alert, AlertTitle, IconButton, Snackbar } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import AddressResult from "../components/AddressResult";
 import { useState } from "react";
 import { callGeoCodingApi } from "../util/api";
+import { centreCoordiantes } from "../util/constants";
 
 export default function AddressScreen() {
-    const [addressResult, setAddressResult] = useState({
-        quadrant: 'southeast'
-    })
+    const [addressResult, setAddressResult] = useState(null)
+    const [addressResultError, setAddressResultError] = useState(false)
     const handleSubmit = async (inputData) => {
-        console.log("Inside handleSubmit", inputData)
-        if (inputData) {
+        setAddressResult(null);
+        if (inputData?.address && inputData?.state && inputData?.city && inputData?.zip) {
             var apiResult = await callGeoCodingApi(inputData)
-            console.log("API_RESULT :: ", apiResult);
+
+            if (apiResult?.result?.addressMatches?.length > 0) {
+                let addressInput = apiResult?.result?.input?.address;
+                var result = {
+                    input: addressInput,
+                    coordinates: apiResult?.result?.addressMatches[0].coordinates
+                }
+                const { x, y } = result.coordinates;
+                if (x > centreCoordiantes.x) {
+                    if (y > centreCoordiantes.y) {
+                        result.quadrant = 'NorthEast'
+                    } else {
+                        result.quadrant = 'SouthEast'
+                    }
+                } else {
+                    if (y > centreCoordiantes.y) {
+                        result.quadrant = 'NorthWest'
+                    } else {
+                        result.quadrant = 'SouthWest'
+                    }
+                }
+                setAddressResult(result);
+                setAddressResultError(false);
+                return true;
+            } else {
+                setAddressResultError(true);
+                return false;
+            }
         }
-        var result = {
-            quadrant: 'northeast'
-        }
-        console.log(result)
-        setAddressResult(result);
     }
     return (
         <>
+            {addressResultError &&
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    open={addressResultError}
+                    onClose={() => setAddressResultError(false)}
+                    key='top-center'
+                    autoHideDuration={3000}
+                >
+                    <Alert severity="error" onClose={() => setAddressResultError(false)}>
+                        No results available for the address. Please check the details provided.
+                    </Alert>
+                </Snackbar>
+            }
             <Box
                 sx={{
                     minWidth: '300px'
                 }}
-                noValidate
-                autoComplete="off"
                 display="flex"
                 minHeight="100vh"
                 justifyContent="center"
@@ -39,9 +73,10 @@ export default function AddressScreen() {
                     direction="column"
                     justifyContent="center"
                     alignItems="center"
+                    margin={"auto"}
                 >
                     <AddressForm handleSubmit={handleSubmit} />
-                    <AddressResult addressResult={addressResult} />
+                    {addressResult && <AddressResult addressResult={addressResult} />}
                 </Grid>
             </Box>
         </>

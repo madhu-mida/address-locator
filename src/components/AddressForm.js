@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
 import { Button, MenuItem } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { states } from '../util/constants';
 
 export default function AddressForm({ handleSubmit }) {
@@ -14,11 +14,35 @@ export default function AddressForm({ handleSubmit }) {
         zip: "",
 
     });
+    const [formValid, setFormValid] = useState(false)
+
+    useEffect(() => {
+        if (data?.address && data?.city && data?.state && data?.zip) {
+            var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(data?.zip);
+            if (isValidZip) {
+                setFormValid(true);
+            } else {
+                setFormValid(false);
+            }
+        } else {
+            setFormValid(false);
+        }
+    }, [data])
 
     const handleChange = (event) => {
-        console.log(event.target.name, event.target.value)
         setData({ ...data, [event.target.name]: event.target.value });
     };
+
+    const clearInput = () => {
+        setData({
+            address: "",
+            city: "",
+            state: states[0].label,
+            zip: "",
+
+        });
+    }
+
     return (
         <>
 
@@ -101,7 +125,7 @@ export default function AddressForm({ handleSubmit }) {
                             label="Zip"
                             name="zip"
                             margin="dense"
-
+                            value={data.zip}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -119,8 +143,12 @@ export default function AddressForm({ handleSubmit }) {
                             style={{
                                 marginTop: '8px'
                             }}
-                            onClick={() => {
-                                handleSubmit(data)
+                            disabled={!formValid}
+                            onClick={async () => {
+                                let res = await handleSubmit(data);
+                                if (res) {
+                                    clearInput();
+                                }
                             }}>Submit</Button>
                     </div>
 

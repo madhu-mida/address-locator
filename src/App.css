@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  background: #304352;
+  background: -webkit-linear-gradient(to right, #d7d2cc, #304352);
+  background: linear-gradient(to right, #d7d2cc, #304352); 
+
 }
 
 .App-logo {

@@ -243,3 +243,8 @@ export const quadrantColor = {
     'southwest': '#B16238',
     'southeast': '#4294B5'
 }
+
+export const centreCoordiantes = {
+    x: -103.771556,
+    y: 44.967243
+}
