@@ -50,6 +50,7 @@ export default function AddressForm({ handleSubmit }) {
 
             <Card variant="outlined">
                 <Box component="form"
+                    data-testid="el-form"
                     noValidate
                     sx={{
                         minWidth: '320px'

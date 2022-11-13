@@ -11,7 +11,7 @@ export default function AddressResult({ addressResult }) {
     }
     return (
         <Zoom in={true}>
-            <Card variant="outlined" style={{ marginTop: 15, backgroundColor: quadrantColor[addressResult?.quadrant.toLowerCase()] || '#BBBBBB', color: '#FFFFFF  ', borderRadius: '20px' }}>
+            <Card data-testid="el-card" variant="outlined" style={{ marginTop: 15, backgroundColor: quadrantColor[addressResult?.quadrant.toLowerCase()] || '#BBBBBB', color: '#FFFFFF  ', borderRadius: '20px' }}>
                 {addressResult && <><Box component="div"
 
                     sx={{
@@ -22,22 +22,22 @@ export default function AddressResult({ addressResult }) {
                     display="flex"
                     flexDirection="column"
                 >
-                    <Typography variant="h2" component="div" style={{ margin: 10 }}>
+                    <Typography data-testid="el-quad" variant="h2" component="div" style={{ margin: 10 }}>
                         {addressResult.quadrant}
                     </Typography>
                     <CardContent>
                         <div style={{ marginTop: 10 }}>
 
-                            <Typography variant="body1" style={{ margin: 10 }}>
+                            <Typography data-testid="el-street" variant="body1" style={{ margin: 10 }}>
                                 {addressResult.input.street}
 
                             </Typography>
-                            <Typography variant="body1" style={{ margin: 10 }}>
+                            <Typography data-testid="el-city-state" variant="body1" style={{ margin: 10 }}>
 
                                 {`${addressResult.input.city}, ${addressResult.input.state}`}
 
                             </Typography>
-                            <Typography variant="body1" style={{ margin: 10 }}>
+                            <Typography data-testid="el-zip" variant="body1" style={{ margin: 10 }}>
 
                                 {addressResult.input.zip}
 
