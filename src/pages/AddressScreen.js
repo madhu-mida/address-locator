@@ -17,6 +17,7 @@ export default function AddressScreen() {
         var result = {
             quadrant: 'northeast'
         }
+        console.log(result)
         setAddressResult(result);
     }
     return (
